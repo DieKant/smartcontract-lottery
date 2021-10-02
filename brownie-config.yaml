@@ -4,3 +4,7 @@ compiler:
  solc:
     remappings:
       - '@chainlink=smartcontractkit/chainlink-brownie-contracts@1.1.1'
+networks:
+  mainnet-fork:
+    # il contratto oracle che restituisce il valore eth/usd
+    eth_usd_price_feed: '0x5f4eC3Df9cbd43714FE2740f5E3616155c5b8419'

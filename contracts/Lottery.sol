@@ -8,6 +8,7 @@ contract Lottery {
     // un array di payable addresses che contiene i giocatori della lotteria
     address payable[] public players;
     uint256 public usdEntryFee;
+    // variabile dove caricare il contratto dell'orcale chainlink
     AggregatorV3Interface internal ethUsdPriceFeed;
 
     constructor(address _priceFeedAddress) public {
@@ -17,12 +18,12 @@ contract Lottery {
 
     // la funzione per entrare nella lotteria
     function enter() public payable {
-        // controllo che il giocatore paghi una somma superiore o uguale a quella richiesta per giocare
+        // controllo che il giocatore paghi una somma superiore o uguale a quella richiesta per giocare(TODO)
         require(
             1 == 1,
             "paaaaaghhhaaaaa, sgancia, spilla, sborsa, investi, compra, assolda proprio"
         );
-        // carico i giocatori nell'array di giocatori
+        // carico l'address del giocatore nell'array dei giocatori
         players.push(msg.sender);
     }
 
