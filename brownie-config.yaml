@@ -1,9 +1,12 @@
-dependecies:
+dependencies:
+  # rimappaggio per gli import su contatto
   - smartcontractkit/chainlink-brownie-contracts@1.1.1
+  - OpenZeppelin/openzeppelin-contracts@3.4.0
 compiler:
- solc:
+  solc:
     remappings:
       - '@chainlink=smartcontractkit/chainlink-brownie-contracts@1.1.1'
+      - '@openzeppelin=OpenZeppelin/openzeppelin-contracts@3.4.0'
 networks:
   mainnet-fork:
     # il contratto oracle che restituisce il valore eth/usd
