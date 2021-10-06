@@ -24,7 +24,7 @@ contract Lottery is VRFConsumerBase, Ownable {
     LOTTERY_STATE public lottery_state;
     bytes32 keyHash;
     uint256 fee;
-    address public recentWinner;
+    address  payable public recentWinner;
 
     // posso aggiungere i costruttori dei contratti dai quali inerito, qui gli do i valore del contratto VRF che mi prende il numero, il contratto link al quale pagare la fee, la fee e l'identificativo del contratto vrf sottoforma di keyhash
     constructor(
