@@ -1,4 +1,4 @@
-from brownie import network, accounts, config, MockV3Aggregator, LinkToken, VRFCoordinatorMock
+from brownie import network, accounts, config, MockV3Aggregator, LinkToken, VRFCoordinatorMock, interface
 
 LOCAL_BLOCKCHAIN_ENVIRONMENTS = ["development", "ganache-local"]
 FORKED_LOCAL_ENVIRONMENTS = ["mainnet-fork", "mainnet-fork-dev"]
@@ -54,6 +54,7 @@ def get_contract(contract_name):
         )
     return contract
 
+
 DECIMALS = 8
 STARTING_VALUE = 200000000000
 
@@ -64,3 +65,21 @@ def deploy_mocks(decimals=DECIMALS, inital_value=STARTING_VALUE):
     MockV3Aggregator.deploy(decimals, inital_value, {"from": account})
     link_token = LinkToken.deploy({"from": account})
     VRFCoordinatorMock.deploy(link_token.address, {"from": account})
+
+""" 
+ci serve il contratto a cui mandare il link, 
+quale account manda link al contratto (None perche si può scegliere noi), 
+quale link token usare (None di base perche possiamo sceglierne 1 specifico), 
+quanto link mandare(in questo esempio 0.1 LINK) 
+"""
+def fund_wiht_link(contract_address, account=None, link_token=None, amount=100000000000000000):
+    # questa è magia nera di python, non ho capito come, ma funziona
+    account = account if account else get_account()
+    link_token = link_token if link_token else get_contract("link_token")
+    tx = link_token.transfer(contract_address, amount, {"from": account})
+    # invece di agire direttamente sul contratto possiamo usare un interfaccia
+    # link_token_contract = interface.LinkTokenInterface(link_token.address)
+    # tx = link_token_contract.transfer(contract_address, amount, {"from": account})
+    tx.wait(1)
+    print("contratto caricato con 0,1 link")
+    return tx

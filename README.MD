@@ -10,5 +10,7 @@ ed riaggiungerlo con alchemy (con infura m'ha dato un monte di problemi, questo 
 
 brownie networks add development mainnet-fork cmd= ganache-cli host=http://127.0.0.1 fork=https://eth-mainnet.alchemyapi.io/v2/HeNtmW3wEVVHUWxseRwoevoNa_DXJVeF accounts=10 mnemonic=brownie port=8545
 
+CONSIGLIO: quando create un account con la vostra chiave privata rinkeby date un invio quando vi chiede la password se siete in locale, per testing e per account senza soldi dentro dato che ogni volta che lancerete un deploy con mocks ve la chiederà
+
 2. testnet rinkeby
 3. ganache mocks

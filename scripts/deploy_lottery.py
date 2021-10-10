@@ -1,5 +1,6 @@
-from scripts.helpful_scripts import get_account, get_contract
+from scripts.helpful_scripts import get_account, get_contract, fund_wiht_link
 from brownie import Lottery, network, config
+import time
 
 
 def deploy_lottery():
@@ -39,8 +40,21 @@ def enter_lottery():
     tx.wait(1)
     print("ora sei un partecipante della lotteria")
 
+# in questa funzione ci servirà del link nel contratto perche dobbiamo prendere il numero random dall'oracle che va pagato
+def end_lottery():
+    account = get_account()
+    lottery = Lottery[-1]
+    # mettiamo del link nel contratto
+    tx = fund_wiht_link(lottery.address)
+    tx.wait(1)
+    ending_transaction = lottery.endLottery({"from": account})
+    ending_transaction.wait(1)
+    # metto questo anche col wait perche il nodo chainlink ci mette del tempo a mandare indietro il numero random
+    time.sleep(60)
+    print(f"{lottery.recentWinner()} is the new winner!")
 
 def main():
     deploy_lottery()
     start_lottery()
     enter_lottery()
+    end_lottery()
