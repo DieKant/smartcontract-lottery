@@ -25,6 +25,7 @@ contract Lottery is VRFConsumerBase, Ownable {
     bytes32 keyHash;
     uint256 fee;
     address  payable public recentWinner;
+    event RequestedRandomness(bytes32 requestId);
 
     // posso aggiungere i costruttori dei contratti dai quali inerito, qui gli do i valore del contratto VRF che mi prende il numero, il contratto link al quale pagare la fee, la fee e l'identificativo del contratto vrf sottoforma di keyhash
     constructor(
@@ -81,7 +82,9 @@ contract Lottery is VRFConsumerBase, Ownable {
     function endLottery() public onlyOwner {
         lottery_state = LOTTERY_STATE.CALCULATING_WINNER;
         // questa funzione ritorna bytes32 requestId
-        requestRandomness(keyHash, fee);
+        bytes32 requestId = requestRandomness(keyHash, fee);
+        // usiamo questo evento per fingerci un nodo chainlink
+        emit RequestedRandomness(requestId);
     }
 
     // la rendo internal cosi solo il vrf può chaiamre questa funzione, ovverride è un opzione che sovrascrive il contenuto della funzione nel contratto d'appartenenza

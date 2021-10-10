@@ -8,6 +8,7 @@ compiler:
       - '@chainlink=smartcontractkit/chainlink-brownie-contracts@1.1.1'
       - '@openzeppelin=OpenZeppelin/openzeppelin-contracts@3.4.0'
 # creo i dati per deployare il mio contratto
+dotenv: .env
 networks:
   default: development
   development:
