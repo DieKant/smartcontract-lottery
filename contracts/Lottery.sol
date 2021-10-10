@@ -51,7 +51,7 @@ contract Lottery is VRFConsumerBase, Ownable {
         );
         // controllo che il giocatore paghi una somma superiore o uguale a quella richiesta per giocare(TODO)
         require(
-            msg.value >= getEntraceFee(),
+            msg.value >= getEntranceFee(),
             "paaaaaghhhaaaaa, sgancia, spilla, sborsa, investi, compra, assolda proprio"
         );
         // carico l'address del giocatore nell'array dei giocatori
@@ -59,7 +59,7 @@ contract Lottery is VRFConsumerBase, Ownable {
     }
 
     //la funzione che determina il valore min di entrata grazie all'oracle chainlink
-    function getEntraceFee() public view returns (uint256) {
+    function getEntranceFee() public view returns (uint256) {
         // prendo quanto è il valore in dollari di 1 ether
         (, int256 price, , , ) = ethUsdPriceFeed.latestRoundData();
         // qui non fo * 18 ma *10 perchè dal contratto torna di suo un numero da 8 decimali

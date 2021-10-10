@@ -14,8 +14,8 @@ def test_get_entrace_fee():
         {"from": account},
     )
     # effettuo il controllo
-    assert lottery.getEntraceFee() > Web3.toWei(0.014, "ether")
-    assert lottery.getEntraceFee() < Web3.toWei(0.018, "ether")
+    assert lottery.getEntranceFee() > Web3.toWei(0.014, "ether")
+    assert lottery.getEntranceFee() < Web3.toWei(0.018, "ether")
 
     # output del 02/08/2021 testando quanto scritto
     """
