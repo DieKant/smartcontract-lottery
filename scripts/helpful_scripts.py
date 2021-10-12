@@ -16,8 +16,7 @@ def get_account(index=None, id=None):
         or network.show_active() in FORKED_LOCAL_ENVIRONMENTS
     ):
         return accounts[0]
-    else:
-        return accounts.add(config["wallets"]["from_key"])
+    return accounts.add(config["wallets"]["from_key"])
 
 
 # mappiamo il tipo di contratto al tipo di mock che ci serve per esso
