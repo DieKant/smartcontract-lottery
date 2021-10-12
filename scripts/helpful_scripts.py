@@ -1,4 +1,4 @@
-from brownie import network, accounts, config, MockV3Aggregator, LinkToken, VRFCoordinatorMock, interface
+from brownie import Contract, network, accounts, config, MockV3Aggregator, LinkToken, VRFCoordinatorMock, interface
 
 LOCAL_BLOCKCHAIN_ENVIRONMENTS = ["development", "ganache-local"]
 FORKED_LOCAL_ENVIRONMENTS = ["mainnet-fork", "mainnet-fork-dev"]

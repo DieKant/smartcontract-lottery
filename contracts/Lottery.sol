@@ -26,6 +26,7 @@ contract Lottery is VRFConsumerBase, Ownable {
     uint256 fee;
     address  payable public recentWinner;
     event RequestedRandomness(bytes32 requestId);
+    event PlayersArray(address payable[] players);
 
     // posso aggiungere i costruttori dei contratti dai quali inerito, qui gli do i valore del contratto VRF che mi prende il numero, il contratto link al quale pagare la fee, la fee e l'identificativo del contratto vrf sottoforma di keyhash
     constructor(
@@ -107,6 +108,7 @@ contract Lottery is VRFConsumerBase, Ownable {
         recentWinner.transfer(address(this).balance);
         // resettiamo il tutto
         // resetto i giocatori, lo stato della lotteria, il numero casuale
+        emit PlayersArray(players);
         players = new address payable[](0);
         lottery_state = LOTTERY_STATE.CLOSE;
         randomness = _randomness;

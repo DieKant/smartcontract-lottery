@@ -50,7 +50,8 @@ def test_can_start_and_enter_lottery():
     lottery.startLottery({"from": account})
 
     # prendi la roba da controllare
-    lottery.enter({"from": account, "value": lottery.getEntranceFee()})
+    tx = lottery.enter({"from": account, "value": lottery.getEntranceFee()})
+    tx.wait(1)
 
     # controlla
     # cotrolliamo che dopo che la lotteria è partita
@@ -66,7 +67,8 @@ def test_can_and_end_lottery():
     lottery.startLottery({"from": account})
     lottery.enter({"from": account, "value": lottery.getEntranceFee()})
     fund_wiht_link(lottery)
-    lottery.endLottery({"from": account})
+    tx = lottery.endLottery({"from": account})
+    tx.wait(1)
     # guardo il 2 perche nell'enum lo stato di calcolo del vincitore è 2
     assert lottery.lottery_state() == 2
 
