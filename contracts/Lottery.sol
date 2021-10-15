@@ -27,6 +27,7 @@ contract Lottery is VRFConsumerBase, Ownable {
     address  payable public recentWinner;
     event RequestedRandomness(bytes32 requestId);
     event PlayersArray(address payable[] players);
+    event CatchPlayerEntering(address playerAddress);
 
     // posso aggiungere i costruttori dei contratti dai quali inerito, qui gli do i valore del contratto VRF che mi prende il numero, il contratto link al quale pagare la fee, la fee e l'identificativo del contratto vrf sottoforma di keyhash
     constructor(
@@ -42,6 +43,7 @@ contract Lottery is VRFConsumerBase, Ownable {
         lottery_state = LOTTERY_STATE.CLOSE;
         fee = _fee;
         keyHash = _keyHash;
+        emit PlayersArray(players);
     }
 
     // la funzione per entrare nella lotteria
@@ -57,6 +59,7 @@ contract Lottery is VRFConsumerBase, Ownable {
             "paaaaaghhhaaaaa, sgancia, spilla, sborsa, investi, compra, assolda proprio"
         );
         // carico l'address del giocatore nell'array dei giocatori
+        emit CatchPlayerEntering(msg.sender);
         players.push(msg.sender);
     }
 

@@ -7,6 +7,7 @@ def deploy_lottery():
     # al get_account gli passo il mio indirizzo locale cosi che scelga il deploy su rete testnet oppure un index se volgio usare ganache
     # id="codecamp-training" per mocks
     account = get_account()
+    print(account)
     lottery = Lottery.deploy(
         # passo il nome del contratto che voglio usare(prendo solo l'address cosi punto quello invece di scaricami tutto)
         get_contract("eth_usd_price_feed").address,
