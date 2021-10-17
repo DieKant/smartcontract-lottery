@@ -69,6 +69,8 @@ contract Lottery is VRFConsumerBase, Ownable {
         (, int256 price, , , ) = ethUsdPriceFeed.latestRoundData();
         // qui non fo * 18 ma *10 perchè dal contratto torna di suo un numero da 8 decimali
         uint256 adjustedPrice = uint256(price) * 10**10;
+        // qui rimoltiplico per 10 alla 18 perche senno mi viene fuori un numero con la virgola
+        // ma dato che è int non posso usarlo quindi lo rimoltiplico per 10 alla 18 cosi da renderlo un int e in formato wei
         uint256 costToEnter = (usdEntryFee * 10**18) / adjustedPrice;
         return costToEnter;
     }
